@@ -3,8 +3,10 @@
 <head>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <script src="https://cdn.tailwindcss.com"></script>
+
 <style>
   .field-group { margin-bottom: 14px; }
+
   .field-group label {
       display: block;
       font-size: 12px;
@@ -12,6 +14,7 @@
       color: #7e22ce;
       margin-bottom: 4px;
   }
+
   .field-group input,
   .field-group select {
       width: 100%;
@@ -22,14 +25,109 @@
       outline: none;
       color: #3b0764;
   }
+
   .field-group input:focus,
   .field-group select:focus {
       border-color: #a21caf;
       box-shadow: 0 0 0 2px #f3e8ff;
   }
+
+  /* ===== HEADER ===== */
+  .header {
+      width: 100%;
+      background: white;
+      box-shadow: 0 2px 12px rgba(0,0,0,0.08);
+      padding: 12px 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      position: sticky;
+      top: 0;
+      z-index: 999;
+  }
+
+  .logo {
+      font-size: 16px;
+      font-weight: 800;
+      color: #7e22ce;
+  }
+
+  .nav {
+      display: flex;
+      gap: 18px;
+  }
+
+  .nav a {
+      text-decoration: none;
+      font-size: 14px;
+      font-weight: 600;
+      color: #7e22ce;
+      padding: 6px 10px;
+      border-radius: 6px;
+      transition: 0.3s;
+  }
+
+  .nav a:hover {
+      background: #f3e8ff;
+      color: #3b0764;
+  }
+
+  .menu-btn {
+      display: none;
+      font-size: 26px;
+      cursor: pointer;
+      color: #7e22ce;
+  }
+
+  /* ===== MOBILE ===== */
+  @media (max-width: 768px) {
+
+      .menu-btn {
+          display: block;
+      }
+
+      .nav {
+          position: absolute;
+          top: 60px;
+          left: 0;
+          width: 100%;
+          background: white;
+          flex-direction: column;
+          display: none;
+          border-top: 1px solid #eee;
+      }
+
+      .nav a {
+          padding: 12px 20px;
+          border-bottom: 1px solid #f3e8ff;
+      }
+
+      .nav.active {
+          display: flex;
+      }
+  }
 </style>
 </head>
-<body class="bg-purple-50 min-h-screen flex items-center justify-center p-4">
+
+<body class="bg-purple-50 min-h-screen flex flex-col">
+
+<!-- ===== HEADER ===== -->
+<header class="header">
+    <div class="logo">
+        વેપારી કુટુંબનો શાજરો
+    </div>
+
+    <nav class="nav" id="navMenu">
+        <a href="{% url 'home' %}">શાજરો</a>
+        <a href="{% url 'add_member' %}">નવો સભ્ય</a>
+        <a href="#">મદદ</a>
+    </nav>
+
+    <div class="menu-btn" onclick="toggleMenu()">☰</div>
+</header>
+
+<!-- ===== FORM ===== -->
+<div class="flex items-center justify-center p-4 flex-1">
 
 <div class="bg-white rounded-2xl shadow-lg p-8 w-full max-w-md">
 
@@ -92,6 +190,15 @@
     </form>
 
 </div>
+
+</div>
+
+<!-- ===== JS ===== -->
+<script>
+function toggleMenu() {
+    document.getElementById("navMenu").classList.toggle("active");
+}
+</script>
 
 </body>
 </html>
