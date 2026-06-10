@@ -2,7 +2,7 @@
     <div class="person">
         {{ member.name }}
         {% comment %} <a href="/edit/{{ member.id }}/">✏️</a> {% endcomment %}
-         <a href="{% url 'edit_member' member.id %}">✏️</a>
+         {% comment %} <a href="{% url 'edit_member' member.id %}">✏️</a> {% endcomment %}
         {% if member.birth_date %}
             <div style="font-size:13px; font-weight:400; color:#fb7185; margin-top:2px;">
                 જ. તા. {{ member.birth_date }}

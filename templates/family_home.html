@@ -163,7 +163,28 @@ body {
     background: #fff;
     transform: translateY(-1px);
 }
+.add-btn1 {
+    position: absolute;
+    right: 130px;
 
+    background: rgba(255,255,255,.95);
+    color: #ef4444;
+
+    border: none;
+    border-radius: 12px;
+
+    padding: 8px 16px;
+    font-size: 13px;
+    font-weight: 700;
+    cursor: pointer;
+
+    transition: .2s;
+}
+
+.add-btn1:hover {
+    background: #fff;
+    transform: translateY(-1px);
+}
 /* Modal Overlay */
 .modal-overlay {
     display: none;
@@ -416,9 +437,13 @@ body {
 <div class="site-header">
     <h1>વેપારી કુટુંબનો સજરો</h1>
     <button class="add-btn" onclick="openModal('addModal')">+ નવો સભ્ય</button>
+    <button class="add-btn1" onclick="window.location.href='{% url 'member_list' %}'">
+    ✏️ સભ્ય સંપાદિત કરો
+</button>
 </div>
 
 <!-- Tree -->
+ 
 <div class="tree-scroll" id="treeScroll">
   <div class="tree-wrap" id="treeWrap">
     <svg id="connector-svg"></svg>

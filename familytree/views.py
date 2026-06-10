@@ -68,3 +68,9 @@ def delete_member(request, pk):
     if request.method == 'POST':
         member.delete()
     return redirect('home')
+
+def member_list(request):
+    members = FamilyMember.objects.all().order_by("name")
+    return render(request, "member_list.html", {
+        "members": members
+    })
