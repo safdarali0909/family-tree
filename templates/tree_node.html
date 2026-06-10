@@ -4,12 +4,12 @@
         {% comment %} <a href="/edit/{{ member.id }}/">✏️</a> {% endcomment %}
          <a href="{% url 'edit_member' member.id %}">✏️</a>
         {% if member.birth_date %}
-            <div style="font-size:10px; font-weight:400; color:#9333ea; margin-top:2px;">
+            <div style="font-size:13px; font-weight:400; color:#fb7185; margin-top:2px;">
                 જ. તા. {{ member.birth_date }}
             </div>
         {% endif %}
         {% if member.death_date %}
-            <div style="font-size:13px; font-weight:500; color:#9333ea; margin-top:1px;">
+            <div style="font-size:13px; font-weight:500; color:#fb7185; margin-top:1px;">
                 <b>અ. તા. {{ member.death_date }}</b>
             </div>
         {% endif %}

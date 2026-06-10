@@ -5,8 +5,15 @@
 <script src="https://cdn.tailwindcss.com"></script>
 <style>
 * { box-sizing: border-box; }
-body { margin: 0; overflow: hidden; background: #fff; font-family: sans-serif; }
 
+body {
+    margin: 0;
+    overflow: hidden;
+    background: #fff8f8;
+    font-family: sans-serif;
+}
+
+/* Tree Area */
 .tree-scroll {
     overflow: auto;
     -webkit-overflow-scrolling: touch;
@@ -16,7 +23,9 @@ body { margin: 0; overflow: hidden; background: #fff; font-family: sans-serif; }
     position: relative;
     margin-top: 60px;
 }
-.tree-scroll:active { cursor: grabbing; }
+.tree-scroll:active {
+    cursor: grabbing;
+}
 
 .tree-wrap {
     display: inline-block;
@@ -28,12 +37,15 @@ body { margin: 0; overflow: hidden; background: #fff; font-family: sans-serif; }
 
 #connector-svg {
     position: absolute;
-    top: 0; left: 0;
-    width: 100%; height: 100%;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
     pointer-events: none;
     overflow: visible;
 }
 
+/* Tree Structure */
 .tree-node {
     display: flex;
     flex-direction: column;
@@ -48,24 +60,47 @@ body { margin: 0; overflow: hidden; background: #fff; font-family: sans-serif; }
     margin-top: 40px;
 }
 
+/* Person Cards */
 .person {
     display: inline-block;
-    border: 1.5px solid #a21caf;
-    border-radius: 6px;
-    background: #fdf4ff;
-    color: #7e22ce;
+    border: 1px solid #fecaca;
+    border-radius: 14px;
+    background: #ffffff;
+    color: #7f1d1d;
     font-weight: 600;
     font-size: 12px;
-    padding: 6px 12px;
+    padding: 8px 14px;
     white-space: nowrap;
     position: relative;
     z-index: 1;
     text-align: center;
+
+    box-shadow:
+        0 4px 10px rgba(239,68,68,.08);
+    transition: all .2s ease;
 }
 
-.person a { font-size: 11px; text-decoration: none; margin-left: 4px; }
-.person .dt { display: block; font-size: 10px; font-weight: 400; color: #9333ea; margin-top: 2px; }
+.person:hover {
+    background: #fff5f5;
+    transform: translateY(-2px);
+}
 
+.person a {
+    font-size: 11px;
+    text-decoration: none;
+    margin-left: 4px;
+    color: #ef4444;
+}
+
+.person .dt {
+    display: block;
+    font-size: 10px;
+    font-weight: 400;
+    color: #fb7185;
+    margin-top: 2px;
+}
+
+/* Header */
 .site-header {
     position: fixed;
     top: 0;
@@ -73,8 +108,11 @@ body { margin: 0; overflow: hidden; background: #fff; font-family: sans-serif; }
     right: 0;
     height: 60px;
 
-    background: #fdf4ff;
-    border-bottom: 1.5px solid #e9d5ff;
+    background: linear-gradient(
+        135deg,
+        #ef4444,
+        #fb7185
+    );
 
     display: flex;
     align-items: center;
@@ -82,13 +120,14 @@ body { margin: 0; overflow: hidden; background: #fff; font-family: sans-serif; }
 
     padding: 0 16px;
     z-index: 200;
-
-    /* ✅ FIX ADDED (important) */
     gap: 12px;
+
+    box-shadow:
+        0 4px 20px rgba(239,68,68,.18);
 }
 
 .site-header h1 {
-    color: #a21caf;
+    color: #fff;
     font-size: 18px;
     font-weight: 700;
 
@@ -97,152 +136,233 @@ body { margin: 0; overflow: hidden; background: #fff; font-family: sans-serif; }
     text-overflow: ellipsis;
 
     max-width: 60%;
-
-    /* ✅ FIX */
     flex: 1;
     min-width: 0;
 }
 
+/* Add Button */
 .add-btn {
     position: absolute;
     right: 20px;
-    background: #a21caf;
-    color: #fff;
+
+    background: rgba(255,255,255,.95);
+    color: #ef4444;
+
     border: none;
-    border-radius: 8px;
+    border-radius: 12px;
+
     padding: 8px 16px;
     font-size: 13px;
-    font-weight: 600;
+    font-weight: 700;
     cursor: pointer;
-}
-.add-btn:hover { background: #86198f; }
 
+    transition: .2s;
+}
+
+.add-btn:hover {
+    background: #fff;
+    transform: translateY(-1px);
+}
+
+/* Modal Overlay */
 .modal-overlay {
     display: none;
     position: fixed;
     inset: 0;
-    background: rgba(0,0,0,0.4);
+    background: rgba(0,0,0,.45);
     z-index: 300;
     align-items: center;
     justify-content: center;
 }
-.modal-overlay.active { display: flex; }
 
+.modal-overlay.active {
+    display: flex;
+}
+
+/* Modal Box */
 .modal-box {
     background: #fff;
-    border-radius: 12px;
+    border-radius: 20px;
     padding: 28px;
     width: 100%;
     max-width: 420px;
+
+    border: 1px solid #fecaca;
+
+    box-shadow:
+        0 20px 40px rgba(239,68,68,.12);
 }
 
 .modal-box h2 {
-    color: #a21caf;
-    font-size: 17px;
+    color: #ef4444;
+    font-size: 18px;
     font-weight: 700;
     margin: 0 0 20px;
     text-align: center;
 }
 
-.field-group { margin-bottom: 14px; }
+/* Form */
+.field-group {
+    margin-bottom: 14px;
+}
 
 .field-group label {
     display: block;
     font-size: 12px;
     font-weight: 600;
-    color: #7e22ce;
+    color: #7f1d1d;
     margin-bottom: 4px;
 }
 
 .field-group input,
 .field-group select {
     width: 100%;
-    border: 1px solid #d8b4fe;
-    border-radius: 8px;
-    padding: 8px 12px;
+    border: 1px solid #fecaca;
+    border-radius: 12px;
+    padding: 10px 12px;
     font-size: 13px;
     outline: none;
-    color: #3b0764;
+    color: #7f1d1d;
+    background: #fff;
 }
 
 .field-group input:focus,
 .field-group select:focus {
-    border-color: #a21caf;
-    box-shadow: 0 0 0 2px #f3e8ff;
+    border-color: #ef4444;
+    box-shadow:
+        0 0 0 4px rgba(239,68,68,.12);
 }
 
-.modal-actions { display: flex; gap: 10px; margin-top: 20px; }
+/* Buttons */
+.modal-actions {
+    display: flex;
+    gap: 10px;
+    margin-top: 20px;
+}
 
 .btn-save {
     flex: 1;
-    background: #a21caf;
+
+    background: linear-gradient(
+        135deg,
+        #ef4444,
+        #fb7185
+    );
+
     color: #fff;
     border: none;
-    border-radius: 8px;
+    border-radius: 12px;
+
     padding: 10px;
     font-size: 14px;
     font-weight: 600;
     cursor: pointer;
+
+    transition: .2s;
 }
-.btn-save:hover { background: #86198f; }
+
+.btn-save:hover {
+    background: linear-gradient(
+        135deg,
+        #dc2626,
+        #ef4444
+    );
+}
 
 .btn-cancel {
     flex: 1;
     background: #fff;
-    color: #7e22ce;
-    border: 1.5px solid #a21caf;
-    border-radius: 8px;
+    color: #ef4444;
+
+    border: 1px solid #fecaca;
+    border-radius: 12px;
+
     padding: 10px;
     font-size: 14px;
     font-weight: 600;
     cursor: pointer;
-}
-.btn-cancel:hover { background: #fdf4ff; }
 
+    transition: .2s;
+}
+
+.btn-cancel:hover {
+    background: #fff1f2;
+}
+
+/* Fit Button */
 #btn-fit {
     position: fixed;
-    bottom: 20px; right: 20px;
+    bottom: 20px;
+    right: 20px;
     z-index: 100;
-    background: #fdf4ff;
-    border: 1.5px solid #a21caf;
-    color: #7e22ce;
+
+    background: #fff;
+    border: 1px solid #fecaca;
+    color: #ef4444;
+
     font-weight: 600;
     font-size: 13px;
-    padding: 8px 16px;
-    border-radius: 8px;
-    cursor: pointer;
-}
-#btn-fit:hover { background: #f3e8ff; }
 
+    padding: 8px 16px;
+    border-radius: 12px;
+    cursor: pointer;
+
+    box-shadow:
+        0 4px 12px rgba(239,68,68,.08);
+}
+
+#btn-fit:hover {
+    background: #fff5f5;
+}
+
+/* Zoom Controls */
 #zoom-controls {
     position: fixed;
-    bottom: 20px; left: 20px;
+    bottom: 20px;
+    left: 20px;
     z-index: 100;
     display: flex;
     gap: 8px;
 }
+
 #zoom-controls button {
-    background: #fdf4ff;
-    border: 1.5px solid #a21caf;
-    color: #7e22ce;
+    background: #fff;
+    border: 1px solid #fecaca;
+    color: #ef4444;
+
     font-weight: 700;
     font-size: 18px;
-    width: 36px; height: 36px;
-    border-radius: 8px;
+
+    width: 38px;
+    height: 38px;
+
+    border-radius: 12px;
     cursor: pointer;
+
+    box-shadow:
+        0 4px 12px rgba(239,68,68,.08);
 }
-#zoom-controls button:hover { background: #f3e8ff; }
+
+#zoom-controls button:hover {
+    background: #fff5f5;
+}
+
 #zoom-label {
-    background: #fdf4ff;
-    border: 1.5px solid #a21caf;
-    color: #7e22ce;
+    background: #fff;
+    border: 1px solid #fecaca;
+    color: #ef4444;
+
     font-size: 12px;
     font-weight: 600;
-    padding: 0 10px;
-    border-radius: 8px;
+
+    padding: 0 12px;
+    border-radius: 12px;
+
     display: flex;
     align-items: center;
 }
+
+/* Mobile */
 @media (max-width: 768px) {
 
     .site-header {
@@ -259,8 +379,37 @@ body { margin: 0; overflow: hidden; background: #fff; font-family: sans-serif; }
         font-size: 12px;
     }
 }
+#btn-download{
+    position:fixed;
+    bottom:70px;
+    right:20px;
+
+    z-index:100;
+
+    background:#fff;
+    border:1px solid #fecaca;
+    color:#ef4444;
+
+    font-weight:600;
+    font-size:13px;
+
+    padding:8px 16px;
+    border-radius:12px;
+
+    cursor:pointer;
+
+    box-shadow:
+        0 4px 12px rgba(239,68,68,.08);
+}
+
+#btn-download:hover{
+    background:#fff5f5;
+}
 </style>
 </head>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
 <body>
 
 <!-- Header -->
@@ -322,6 +471,9 @@ body { margin: 0; overflow: hidden; background: #fff; font-family: sans-serif; }
 </div>
 
 <button id="btn-fit" onclick="fitToScreen()">⛶ Fit</button>
+<button id="btn-download" onclick="downloadTreePDF()">
+    ⬇ Download PDF
+</button>
 <div id="zoom-controls">
   <button onclick="zoom(-0.1)">−</button>
   <div id="zoom-label">100%</div>
@@ -382,11 +534,21 @@ function drawConnectors() {
 }
 
 function addLine(svg, x1, y1, x2, y2) {
-    var line = document.createElementNS('http://www.w3.org/2000/svg','line');
-    line.setAttribute('x1', x1); line.setAttribute('y1', y1);
-    line.setAttribute('x2', x2); line.setAttribute('y2', y2);
-    line.setAttribute('stroke', '#a21caf');
-    line.setAttribute('stroke-width', 2 / currentScale);
+    var line = document.createElementNS(
+        'http://www.w3.org/2000/svg',
+        'line'
+    );
+
+    line.setAttribute('x1', x1);
+    line.setAttribute('y1', y1);
+    line.setAttribute('x2', x2);
+    line.setAttribute('y2', y2);
+
+    line.setAttribute('stroke', '#fb7185');
+    line.setAttribute('stroke-width', '1.2');
+    line.setAttribute('stroke-linecap', 'round');
+    line.setAttribute('opacity', '0.75');
+
     svg.appendChild(line);
 }
 
@@ -419,28 +581,57 @@ function fitToScreen() {
 }
 
 function zoom(delta) {
-    applyScale(Math.min(Math.max(currentScale + delta, 0.1), 2));
+    const newScale = Math.min(
+        Math.max(currentScale + delta, 0.1),
+        2
+    );
+
+    applyScale(newScale);
+
+    requestAnimationFrame(() => {
+        drawConnectors();
+    });
 }
 
 window.addEventListener('resize', fitToScreen);
 
 function setupDrag() {
-    var el = document.getElementById('treeScroll');
-    var isDown = false, startX, startY, scrollLeft, scrollTop;
-    el.addEventListener('mousedown', function(e) {
+    const el = document.getElementById('treeScroll');
+
+    let isDown = false;
+    let startX;
+    let startY;
+    let scrollLeft;
+    let scrollTop;
+
+    el.addEventListener('mousedown', (e) => {
+        if (e.button !== 0) return; // left mouse only
+
         isDown = true;
-        startX = e.pageX - el.offsetLeft;
-        startY = e.pageY - el.offsetTop;
+        el.style.cursor = 'grabbing';
+
+        startX = e.clientX;
+        startY = e.clientY;
+
         scrollLeft = el.scrollLeft;
-        scrollTop  = el.scrollTop;
+        scrollTop = el.scrollTop;
     });
-    el.addEventListener('mouseleave', function() { isDown = false; });
-    el.addEventListener('mouseup',    function() { isDown = false; });
-    el.addEventListener('mousemove',  function(e) {
+
+    document.addEventListener('mouseup', () => {
+        isDown = false;
+        el.style.cursor = 'grab';
+    });
+
+    document.addEventListener('mousemove', (e) => {
         if (!isDown) return;
+
         e.preventDefault();
-        el.scrollLeft = scrollLeft - (e.pageX - el.offsetLeft - startX);
-        el.scrollTop  = scrollTop  - (e.pageY - el.offsetTop  - startY);
+
+        const dx = e.clientX - startX;
+        const dy = e.clientY - startY;
+
+        el.scrollLeft = scrollLeft - dx;
+        el.scrollTop = scrollTop - dy;
     });
 }
 
@@ -452,6 +643,92 @@ document.querySelectorAll('.modal-overlay').forEach(function(overlay) {
         if (e.target === overlay) closeModal(overlay.id);
     });
 });
+document.getElementById('treeScroll').addEventListener('wheel', function(e) {
+    e.preventDefault();
+
+    const delta = e.deltaY > 0 ? -0.1 : 0.1;
+    zoom(delta);
+}, { passive: false });
+
+async function downloadTreePDF() {
+
+    const { jsPDF } = window.jspdf;
+
+    const tree = document.getElementById('treeWrap');
+
+    const oldTransform = tree.style.transform;
+
+    tree.style.transform = 'scale(1)';
+
+    await new Promise(resolve =>
+        requestAnimationFrame(resolve)
+    );
+
+    const canvas = await html2canvas(tree, {
+        scale: 2,
+        useCORS: true,
+        backgroundColor: '#ffffff'
+    });
+
+    tree.style.transform = oldTransform;
+
+    const imgData = canvas.toDataURL('image/png');
+
+    const pdf = new jsPDF({
+        orientation:
+            canvas.width > canvas.height
+                ? 'landscape'
+                : 'portrait',
+        unit: 'mm',
+        format: 'a4'
+    });
+
+    const pageWidth =
+        pdf.internal.pageSize.getWidth();
+
+    const pageHeight =
+        pdf.internal.pageSize.getHeight();
+
+    const imgWidth = pageWidth;
+
+    const imgHeight =
+        (canvas.height * imgWidth) /
+        canvas.width;
+
+    let heightLeft = imgHeight;
+    let position = 0;
+
+    pdf.addImage(
+        imgData,
+        'PNG',
+        0,
+        position,
+        imgWidth,
+        imgHeight
+    );
+
+    heightLeft -= pageHeight;
+
+    while (heightLeft > 0) {
+
+        position = heightLeft - imgHeight;
+
+        pdf.addPage();
+
+        pdf.addImage(
+            imgData,
+            'PNG',
+            0,
+            position,
+            imgWidth,
+            imgHeight
+        );
+
+        heightLeft -= pageHeight;
+    }
+
+    pdf.save('family-tree.pdf');
+}
 </script>
 
 </body>
